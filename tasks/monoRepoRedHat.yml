@@ -1,0 +1,28 @@
+---
+- rpm_key:
+    state: present
+    key: "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoRedHat
+
+- name: Add official mono repository
+  yum_repository:
+    state: present
+    name: mono
+    description: Official mono repository
+    baseurl: http://download.mono-project.com/repo/centos7/
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoRedHat
+
+- name: Install mono-devel
+  yum:
+    state: present
+    name: mono-devel
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoRedHat

@@ -1,0 +1,34 @@
+---
+aspects_duplicati_enabled: True
+aspects_duplicati_package_staging: /mounts/share/package_staging
+aspects_duplicati_service_enabled: False
+
+# DAEMON_OPT values for etc-default-duplicati.j2 and etc-init-duplicati.conf.j2 templates
+# Based on duplicati-server's command line flags.
+## --unencrypted-database: Disables database encryption
+aspects_duplicati_daemon_opts_unencrypted__database: False
+## --portable-mode: Activates portable mode where the database is placed below the program executable
+aspects_duplicati_daemon_opts_portable__mode: False
+## --log-file: Outputs log information to the file given
+aspects_duplicati_daemon_opts_log__file: /var/log/duplicati.log
+## --log-level: Determines the amount of information written in the log file
+# profiling, information, warning, and error
+aspects_duplicati_daemon_opts_log__level: information
+## --webservice-webroot: The path to the folder where the static files for the webserver is present. The folder must be located beneath the installation folder
+aspects_duplicati_daemon_opts_webservice__webroot: False
+## --webservice-port: The port the webserver listens on. Multiple values may be supplied with a comma in between.
+aspects_duplicati_daemon_opts_webservice__port: 8200
+## --webservice-sslcertificatefile: The certificate and key file in PKCS #12 format the webserver use for SSL. Only RSA/DSA keys are supported.
+aspects_duplicati_daemon_opts_webservice__sslcertificatefile: False
+## --webservice-sslcertificatepassword: The password for decryption of certificate PKCS #12 file.
+aspects_duplicati_daemon_opts_webservice__sslcertificatepassword: False
+## --webservice-interface: The interface the webserver listens on. The special values "*" and "any" means any interface. The special value "loopback" means the loopback adapter.
+aspects_duplicati_daemon_opts_webservice__interface: False
+## --webservice-password: The password required to access the webserver. This option is saved so you do not need to set it on each run. Setting an empty value disables the password.
+aspects_duplicati_daemon_opts_webservice__password: False
+## --ping-pong-keepalive: When running as a server, the service daemon must verify that the process is responding. If this option is enabled, the server reads stdin and writes a reply to each line read
+aspects_duplicati_daemon_opts_ping__pong__keepalive: False
+## --log-retention: Set the time after which log data will be purged from the database.
+aspects_duplicati_daemon_opts_log__retention: False
+## --server-datafolder: Duplicati needs to store a small database with all settings. Use this option to choose where the settings are stored. This option can also be set with the environment variable DUPLICATI_HOME.
+aspects_duplicati_daemon_opts_server__datafolder: False

@@ -1,0 +1,33 @@
+---
+- name: duplicati start
+  service:
+    name: duplicati
+    state: started
+    enabled: "{{ aspects_duplicati_service_enabled }}"
+  tags:
+    - aspects_duplicati
+    - aspects_duplicati_handlers
+
+- name: duplicati stop
+  service:
+    name: duplicati
+    state: stopped
+  tags:
+    - aspects_duplicati
+    - aspects_duplicati_handlers
+
+- name: duplicati restart
+  service:
+    name: duplicati
+    state: restarted
+  tags:
+    - aspects_duplicati
+    - aspects_duplicati_handlers
+
+- name: duplicati reload
+  service:
+    name: duplicati
+    state: reloaded
+  tags:
+    - aspects_duplicati
+    - aspects_duplicati_handlers

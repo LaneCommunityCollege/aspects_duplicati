@@ -1,0 +1,49 @@
+# {{ ansible_managed }}
+# Defaults for duplicati initscript
+# sourced by /etc/init.d/duplicati
+# installed at /etc/default/duplicati by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+DAEMON_OPTS=" \
+{% if aspects_duplicati_daemon_opts_unencrypted__database != False %}
+    --unencrypted-database \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_portable__mode != False %}
+    --portable-mode \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_log__file != False %}
+    --log-file={{ aspects_duplicati_daemon_opts_log__file }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_log__level != False %}
+    --log-level={{ aspects_duplicati_daemon_opts_log__level }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__webroot != False %}
+    --webservice-webroot={{ aspects_duplicati_daemon_opts_webservice__webroot }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__port != False %}
+    --webservice-port={{ aspects_duplicati_daemon_opts_webservice__port }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__sslcertificatefile != False %}
+    --webservice-sslcertificatefile={{ aspects_duplicati_daemon_opts_webservice__sslcertificatefile }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__sslcertificatepassword != False %}
+    --webservice-sslcertificatepassword={{ aspects_duplicati_daemon_opts_webservice__sslcertificatepassword }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__interface != False %}
+    --webservice-interface={{ aspects_duplicati_daemon_opts_webservice__interface }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_webservice__password != False %}
+    --webservice-password={{ aspects_duplicati_daemon_opts_webservice__password }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_ping__pong__keepalive != False %}
+    --ping-pong-keepalive \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_log__retention != False %}
+    --log-retention={{ aspects_duplicati_daemon_opts_log__retention }} \
+{% endif %}
+{% if aspects_duplicati_daemon_opts_server__datafolder != False %}
+    --server-datafolder={{ aspects_duplicati_daemon_opts_server__datafolder }} \
+{% endif %}
+;"

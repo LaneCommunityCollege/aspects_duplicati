@@ -1,0 +1,32 @@
+---
+- include: "monoRepo{{ ansible_os_family }}.yml"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+
+- name: Create package staging directory.
+  file:
+    state: directory
+    path: "{{ aspects_duplicati_package_staging }}"
+  tags:
+  - aspects_duplicati
+
+- include: "duplicatiPackage{{ ansible_os_family }}.yml"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+
+- name: Set /etc/default/duplicati template
+  template:
+    src: "etc-default-duplicati.j2"
+    dest: "/etc/default/duplicati"
+  notify: "duplicati restart"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_config
+
+- name: Include serviceFile tasks
+  include: serviceFile.yml
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_config

@@ -1,0 +1,29 @@
+---
+- name: Copy duplicati.rpm to <aspects_duplicati_package_staging>/duplicati.rpm
+  copy:
+    src: duplicati.rpm
+    dest: "{{ aspects_duplicati_package_staging }}/duplicati.rpm"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+  - aspects_duplicati_duplicatiPackageRedHat
+
+- name: Install epel-release package for dependencies
+  yum:
+    state: present
+    name: epel-release
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+  - aspects_duplicati_duplicatiPackageRedHat
+
+
+- name: Install duplicati.rpm package
+  yum:
+    state: present
+    name: "{{ aspects_duplicati_package_staging }}/duplicati.rpm"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+  - aspects_duplicati_duplicatiPackageRedHat
+

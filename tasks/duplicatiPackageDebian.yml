@@ -1,0 +1,22 @@
+---
+- name: Copy duplicati.deb to <aspects_duplicati_package_staging>/duplicati.deb
+  copy:
+    src: duplicati.deb
+    dest: "{{ aspects_duplicati_package_staging }}/duplicati.deb"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+  - aspects_duplicati_duplicatiPackageDebian
+
+
+- name: Install duplicati.deb package
+  apt:
+    state: present
+    deb: "{{ aspects_duplicati_package_staging }}/duplicati.deb"
+    force: yes
+    install_recommends: yes
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_duplicatiPackage
+  - aspects_duplicati_duplicatiPackageDebian
+

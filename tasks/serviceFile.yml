@@ -1,0 +1,29 @@
+---
+- name: Check to see if /lib/systemd/system/duplicati.service exists
+  stat:
+    path: /lib/systemd/system/duplicati.service
+  register: duplicatiServiceFile
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_serviceFile
+  - aspects_duplicati_config
+
+- name: Create /lib/systemd/system/duplicati.service if needed
+  when: duplicatiServiceFile.stat.exists == False
+  copy:
+    src: lib-systemd-system-duplicati.service
+    dest: /lib/systemd/system/duplicati.service
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_serviceFile
+  - aspects_duplicati_config
+
+- name: If upstart is used, set upstart file in /etc/init/duplicati.conf
+  when: ansible_service_mgr == "upstart"
+  template:
+    src: etc-init-duplicati.conf.j2
+    dest: /etc/init/duplicati.conf
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_serviceFile
+  - aspects_duplicati_config

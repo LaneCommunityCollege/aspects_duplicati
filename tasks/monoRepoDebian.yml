@@ -1,0 +1,52 @@
+---
+- name: Debian - Install python-apt for use with ansible apt modules.
+  apt:
+    pkg: python-apt
+    state: present
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoDebian
+
+# Key is the same for both Ubuntu and Debian
+- name: Add apt key for official mono repositories
+  apt_key:
+    state: present
+    keyserver: keyserver.ubuntu.com
+    id: 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoDebian
+
+- name: Add apt repository for official mono Ubuntu repositories
+  when: ansible_distribution == "Ubuntu"
+  apt_repository:
+    state: present
+    repo: "deb http://download.mono-project.com/repo/ubuntu {{ ansible_distribution_release }} main"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoDebian
+
+- name: Add apt repository for official mono Debian repositories
+  when: ansible_distribution == "Debian"
+  apt_repository:
+    state: present
+    repo: "deb http://download.mono-project.com/repo/debian {{ ansible_distribution_release }} main"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoDebian
+
+
+- name: Install mono
+  apt:
+    pkg: "mono-devel"
+    state: "present"
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  tags:
+  - aspects_duplicati
+  - aspects_duplicati_monoRepo
+  - aspects_duplicati_monoRepoDebian
